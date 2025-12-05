@@ -5,9 +5,9 @@ public class Range {
     private long high;
 
     public Range(String range) {
-        String[] limits = range.split("-");
-        low = Long.parseLong(limits[0]);
-        high = Long.parseLong(limits[1]);
+        int index = range.indexOf('-');
+        low = Long.parseLong(range.substring(0, index));
+        high = Long.parseLong(range.substring(index + 1));
     }
 
     public boolean isInRange(long val) {
@@ -15,7 +15,7 @@ public class Range {
     }
 
     public boolean mergeRange(Range other) {
-        if (high < other.low || low > other.high) {
+        if (high + 1 < other.low || low - 1 > other.high) {
             return false;
         }
         low = Math.min(low, other.low);
