@@ -1,8 +1,6 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import util.ReadFile;
 
 public class Day04 {
     public static void main(String[] args) {
@@ -11,23 +9,14 @@ public class Day04 {
     }
 
     private int accessibleRolls(String filename) {
-        ArrayList<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading input file...");
-        }
-
+        ArrayList<String> lines = ReadFile.getAllLines(filename);
         int count = 0;
         int rowLength = lines.get(0).length();
         int colLength = lines.size();
         byte[] grid = new byte[rowLength * colLength];
         countFreeRolls(lines, grid, rowLength, colLength);
-        for (int i = 0; i < grid.length; i++) {
-            if (grid[i] < 4) {
+        for (byte adjacents : grid) {
+            if (adjacents < 4) {
                 count++;
             }
         }
@@ -78,16 +67,7 @@ public class Day04 {
     }
 
     private long recursivelyAccessibleRolls(String filename) {
-        ArrayList<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        } catch (IOException e) {
-            System.err.println("Error reading input file...");
-        }
-
+        ArrayList<String> lines = ReadFile.getAllLines(filename);
         int rowLength = lines.get(0).length();
         int colLength = lines.size();
         byte[] grid = new byte[rowLength * colLength];
