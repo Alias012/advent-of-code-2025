@@ -6,8 +6,8 @@ public class Range {
 
     public Range(String range) {
         String[] limits = range.split("-");
-        this.low = Long.parseLong(limits[0]);
-        this.high = Long.parseLong(limits[1]);
+        low = Long.parseLong(limits[0]);
+        high = Long.parseLong(limits[1]);
     }
 
     public boolean isInRange(long val) {
@@ -15,23 +15,12 @@ public class Range {
     }
 
     public boolean mergeRange(Range other) {
-        if (low <= other.low && high >= other.high) {
-            return true;
+        if (high < other.low || low > other.high) {
+            return false;
         }
-        if (low >= other.low && high <= other.high) {
-            low = other.low;
-            high = other.high;
-            return true;
-        }
-        if (low <= other.low && high >= other.low) {
-            high = other.high;
-            return true;
-        }
-        if (low >= other.low && low <= other.high) {
-            low = other.low;
-            return true;
-        }
-        return false;
+        low = Math.min(low, other.low);
+        high = Math.max(high, other.high);
+        return true;
     }
 
     public long getCoverage() {
