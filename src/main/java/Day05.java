@@ -31,8 +31,8 @@ public class Day05 {
         ArrayList<Range> freshRanges = loadRanges(freshIDs);
         return availableIDs.stream()
                            .mapToLong(Long::parseLong)
-                           .map(id -> freshRanges.stream().anyMatch(range -> range.isInRange(id)) ? 1 : 0)
-                           .sum();
+                           .filter(id -> freshRanges.stream().anyMatch(range -> range.isInRange(id)))
+                           .count();
     }
 
     private static long countAllFresh(String filename) {
