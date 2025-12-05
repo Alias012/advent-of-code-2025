@@ -7,11 +7,11 @@ import util.Range;
 
 public class Day05 {
     public static void main(String[] args) {
-        System.out.println(new Day05().countAvailableFresh("src/main/resources/Day05.txt"));
-        System.out.println(new Day05().countAllFresh("src/main/resources/Day05.txt"));
+        System.out.println(Day05.countAvailableFresh("src/main/resources/Day05.txt")); //p1
+        System.out.println(Day05.countAllFresh("src/main/resources/Day05.txt")); //p2
     }
 
-    private long countAvailableFresh(String filename) {
+    private static long countAvailableFresh(String filename) {
         ArrayList<String> freshIDs = new ArrayList<>(); //before empty line in file
         ArrayList<String> availableIDs = new ArrayList<>(); //after empty line in file
 
@@ -35,13 +35,13 @@ public class Day05 {
                            .sum();
     }
 
-    private long countAllFresh(String filename) {
+    private static long countAllFresh(String filename) {
         return loadRanges(ReadFile.getLinesUntilBreak(filename)).stream()
                                                                 .mapToLong(Range::getCoverage)
                                                                 .sum();
     }
 
-    private ArrayList<Range> loadRanges(ArrayList<String> freshIDs) {
+    private static ArrayList<Range> loadRanges(ArrayList<String> freshIDs) {
         ArrayList<Range> freshRanges = new ArrayList<>();
         for (String freshRange : freshIDs) {
             Range newRange = new Range(freshRange);

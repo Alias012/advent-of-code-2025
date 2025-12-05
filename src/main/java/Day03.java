@@ -4,11 +4,11 @@ import java.io.IOException;
 
 public class Day03 {
     public static void main(String[] args) {
-        System.out.println(new Day03().maxJoltage("src/main/resources/Day03.txt", 2));
-        System.out.println(new Day03().maxJoltage("src/main/resources/Day03.txt", 12));
+        System.out.println(Day03.maxJoltage("src/main/resources/Day03.txt", 2)); //p1
+        System.out.println(Day03.maxJoltage("src/main/resources/Day03.txt", 12)); //p2
     }
 
-    private long maxJoltage(String filename, int numJolts) {
+    private static long maxJoltage(String filename, int numJolts) {
         long count = 0;
         char[] jolts = new char[numJolts];
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
@@ -24,7 +24,7 @@ public class Day03 {
         return count;
     }
 
-    private void maxBattery(String line, char[] jolts) {
+    private static void maxBattery(String line, char[] jolts) {
         char[] chars = line.toCharArray();
         int numJolts = jolts.length;
         int start = chars.length - numJolts;

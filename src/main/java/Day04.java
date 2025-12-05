@@ -4,11 +4,11 @@ import util.ReadFile;
 
 public class Day04 {
     public static void main(String[] args) {
-        System.out.println(new Day04().accessibleRolls("src/main/resources/Day04.txt"));
-        System.out.println(new Day04().recursivelyAccessibleRolls("src/main/resources/Day04.txt"));
+        System.out.println(Day04.accessibleRolls("src/main/resources/Day04.txt")); //p1
+        System.out.println(Day04.recursivelyAccessibleRolls("src/main/resources/Day04.txt")); //p2
     }
 
-    private int accessibleRolls(String filename) {
+    private static int accessibleRolls(String filename) {
         ArrayList<String> lines = ReadFile.getAllLines(filename);
         int count = 0;
         int rowLength = lines.get(0).length();
@@ -24,7 +24,7 @@ public class Day04 {
         return count;
     }
 
-    private void countFreeRolls(ArrayList<String> lines, byte[] grid, int rowLength, int colLength) {
+    private static void countFreeRolls(ArrayList<String> lines, byte[] grid, int rowLength, int colLength) {
         for (int i = 0; i < rowLength; i++) {
             String line = lines.get(i);
             int rowVal = i * rowLength;
@@ -66,7 +66,7 @@ public class Day04 {
         }
     }
 
-    private long recursivelyAccessibleRolls(String filename) {
+    private static long recursivelyAccessibleRolls(String filename) {
         ArrayList<String> lines = ReadFile.getAllLines(filename);
         int rowLength = lines.get(0).length();
         int colLength = lines.size();
@@ -74,7 +74,7 @@ public class Day04 {
         return recursiveCountFreeRolls(lines, grid, rowLength, colLength);
     }
 
-    private int recursiveCountFreeRolls(ArrayList<String> lines, byte[] grid, int rowLength, int colLength) {
+    private static int recursiveCountFreeRolls(ArrayList<String> lines, byte[] grid, int rowLength, int colLength) {
         int oldCount = 0;
         int newCount = 0;
 

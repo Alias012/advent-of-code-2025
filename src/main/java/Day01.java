@@ -4,11 +4,11 @@ import java.io.IOException;
 
 public class Day01 {
     public static void main(String[] args) {
-        System.out.println(new Day01().crackLock("src/main/resources/Day01.txt"));
-        System.out.println(new Day01().crackSecureLock("src/main/resources/Day01.txt"));
+        System.out.println(Day01.crackLock("src/main/resources/Day01.txt")); //p1
+        System.out.println(Day01.crackSecureLock("src/main/resources/Day01.txt")); //p2
     }
 
-    private int crackLock(String filename) {
+    private static int crackLock(String filename) {
         int lock = 50;
         int count = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
@@ -32,7 +32,7 @@ public class Day01 {
         return count;
     }
 
-    private int crackSecureLock(String filename) {
+    private static int crackSecureLock(String filename) {
         int lock = 50;
         int count = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {

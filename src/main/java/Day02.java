@@ -4,11 +4,11 @@ import java.io.IOException;
 
 public class Day02 {
     public static void main(String[] args) {
-        System.out.println(new Day02().repeatedIDs("src/main/resources/Day02.txt"));
-        System.out.println(new Day02().manyRepeatedIDs("src/main/resources/Day02.txt"));
+        System.out.println(Day02.repeatedIDs("src/main/resources/Day02.txt")); //p1
+        System.out.println(Day02.manyRepeatedIDs("src/main/resources/Day02.txt")); //p2
     }
 
-    private long repeatedIDs(String filename) {
+    private static long repeatedIDs(String filename) {
         long count = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String[] ranges = reader.readLine().split(",");
@@ -30,7 +30,7 @@ public class Day02 {
         return count;
     }
 
-    private long manyRepeatedIDs(String filename) {
+    private static long manyRepeatedIDs(String filename) {
         long count = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String[] ranges = reader.readLine().split(",");
