@@ -12,7 +12,6 @@ public class Day06 {
     }
 
     private static long verticalMath(String filename) {
-        long count = 0;
         ArrayList<String[]> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
@@ -26,19 +25,18 @@ public class Day06 {
         int colLength = lines.size();
         String[] operatorRow = lines.remove(colLength - 1);
 
-        int rowLength = lines.get(0).length;
-        long[][] transpose = new long[rowLength][colLength - 1];
+        int rowLength = lines.getFirst().length;
+        long count = 0;
 
         for (int i = 0; i < rowLength; i++) {
+            long[] row = new long[colLength - 1];
             for (int j = 0; j < colLength - 1; j++) {
-                transpose[i][j] = Long.parseLong(lines.get(j)[i]);
+                row[j] = Long.parseLong(lines.get(j)[i]);
             }
-        }
 
-        for (int i = 0; i < rowLength; i++) {
             count += switch (operatorRow[i]) {
-                case "*" -> Arrays.stream(transpose[i]).reduce(1, Day06::multiply);
-                case "+" -> Arrays.stream(transpose[i]).sum();
+                case "*" -> Arrays.stream(row).reduce(1, (x, y) -> x * y);
+                case "+" -> Arrays.stream(row).sum();
                 default -> -1;
             };
         }
@@ -56,6 +54,9 @@ public class Day06 {
         ArrayList<String[]> transpose = new ArrayList<>();
         ArrayList<String> operators = new ArrayList<>();
         operators.add(String.valueOf(operatorRow.charAt(0)));
+
+        //uses the distance between operators to find width of each column
+        //essentially splits on the location of operator and saves spaces
         for (int i = 1; i < operatorRow.length(); i++) {
             char c = operatorRow.charAt(i);
             if (c != ' ') {
@@ -71,50 +72,36 @@ public class Day06 {
             colWidth++;
         }
 
+        //the last column
         String[] row = new String[colLength - 1];
         for (int j = 0; j < colLength - 1; j++) {
             row[j] = lines.get(j).substring(totalWidth);
         }
         transpose.add(row);
 
-        ArrayList<ArrayList<Long>> cephalopodTranspose = new ArrayList<>(transpose.size());
-        for(String[] oldRow : transpose) {
-            int length = oldRow[0].length();
-            int count = 0;
-            ArrayList<Long> newRow = new ArrayList<>();
-            while (count != length) {
-                long newNum = 0;
-                for (String num : oldRow) {
-                    char c = num.charAt(length - count - 1);
-                    if (c != ' ') {
-                        newNum = newNum * 10 + Byte.parseByte(String.valueOf(c));
-                    }
-                }
-                if (newNum != 0) {
-                    newRow.add(newNum);
-                }
-                count++;
-            }
-            cephalopodTranspose.add(newRow);
-        }
-
-        long count = 0;
-        for (int i = 0; i < cephalopodTranspose.size(); i++) {
-            count += switch (operators.get(i)) {
-                case "*" -> cephalopodTranspose.get(i).stream().reduce(1L, Day06::multiply);
-                case "+" -> cephalopodTranspose.get(i).stream().reduce(0L, Day06::add);
-                default -> -1;
-            };
-        }
-
-        return count;
-    }
-
-    private static long multiply(long l1, long l2) {
-        return l1 * l2;
-    }
-
-    private static long add(long l1, long l2) {
-        return l1 + l2;
+        return transpose.stream()
+                        .map(oldRow -> { //find the column-wise values
+                                    int length = oldRow[0].length();
+                                    ArrayList<Long> newRow = new ArrayList<>();
+                                    while (length-- != 0) {
+                                        long newNum = 0;
+                                        for (String num : oldRow) {
+                                            char c = num.charAt(length);
+                                            if (c != ' ') {
+                                                newNum = newNum * 10 + Character.getNumericValue(c);
+                                            }
+                                        }
+                                        if (newNum != 0) {
+                                            newRow.add(newNum);
+                                        }
+                                    }
+                                    return newRow;})
+                        .mapToLong(newRow -> {
+                                    switch (operators.removeFirst()) {
+                                        case "*" -> { return newRow.stream().reduce(1L, (x, y) -> x * y); }
+                                        case "+" -> { return newRow.stream().reduce(0L, Long::sum); }
+                                        default -> { return -1; }
+                                    }})
+                        .sum();
     }
 }
