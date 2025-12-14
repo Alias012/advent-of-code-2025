@@ -4,8 +4,8 @@ import java.io.IOException;
 
 public class Day03 {
     public static void main(String[] args) {
-        System.out.println(Day03.maxJoltage("src/main/resources/Day03.txt", 2)); //p1
-        System.out.println(Day03.maxJoltage("src/main/resources/Day03.txt", 12)); //p2
+        System.out.println(Day03.maxJoltage("src/main/resources/inputs/Day03.txt", 2)); //p1
+        System.out.println(Day03.maxJoltage("src/main/resources/inputs/Day03.txt", 12)); //p2
     }
 
     private static long maxJoltage(String filename, int numJolts) {

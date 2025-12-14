@@ -5,15 +5,15 @@ import util.ReadFile;
 
 public class Day11 {
     public static void main(String[] args) {
-        System.out.println(Day11.countPathsOut("src/main/resources/Day11.txt")); //p1
-        System.out.println(Day11.countSpecialPathsOut("src/main/resources/Day11.txt")); //p2
+        System.out.println(Day11.countPathsOut("src/main/resources/inputs/Day11.txt")); //p1
+        System.out.println(Day11.countSpecialPathsOut("src/main/resources/inputs/Day11.txt")); //p2
     }
 
     public static long countPathsOut(String filename) {
         HashMap<String, String[]> graph = parseGraph(filename);
         HashMap<String, Long> cache = new HashMap<>();
         cache.put("out", 1L);
-        return countPathsToTarget("you", graph, cache);
+        return countPaths("you", graph, cache);
     }
 
     public static long countSpecialPathsOut(String filename) {
@@ -33,25 +33,25 @@ public class Day11 {
         return pathA + pathB;
     }
 
-    private static long getPathResult(HashMap<String, String[]> devicePaths, ArrayList<Pair<String, String>> paths) {
+    private static long getPathResult(HashMap<String, String[]> graph, ArrayList<Pair<String, String>> paths) {
         long count = 1L;
         while (!paths.isEmpty()) {
-            Pair<String, String> path =  paths.removeFirst();
+            Pair<String, String> path = paths.removeFirst();
             HashMap<String, Long> cache = new HashMap<>();
             cache.put(path.getY(), 1L);
-            count *= countPathsToTarget(path.getX(), devicePaths, cache);
+            count *= countPaths(path.getX(), graph, cache);
         }
         return count;
     }
 
-    private static long countPathsToTarget(String node, HashMap<String, String[]> devicePaths, HashMap<String, Long> cache) {
+    private static long countPaths(String node, HashMap<String, String[]> graph, HashMap<String, Long> cache) {
         if (cache.containsKey(node)) {
             return cache.get(node);
         }
 
         long count = 0;
-        for (String child : devicePaths.getOrDefault(node, new String[0])) {
-            count += countPathsToTarget(child, devicePaths, cache);
+        for (String child : graph.getOrDefault(node, new String[0])) {
+            count += countPaths(child, graph, cache);
         }
         cache.put(node, count);
         return count;

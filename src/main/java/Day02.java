@@ -4,8 +4,8 @@ import java.io.IOException;
 
 public class Day02 {
     public static void main(String[] args) {
-        System.out.println(Day02.repeatedIDs("src/main/resources/Day02.txt")); //p1
-        System.out.println(Day02.manyRepeatedIDs("src/main/resources/Day02.txt")); //p2
+        System.out.println(Day02.repeatedIDs("src/main/resources/inputs/Day02.txt")); //p1
+        System.out.println(Day02.manyRepeatedIDs("src/main/resources/inputs/Day02.txt")); //p2
     }
 
     private static long repeatedIDs(String filename) {

@@ -4,8 +4,8 @@ import util.ReadFile;
 
 public class Day04 {
     public static void main(String[] args) {
-        System.out.println(Day04.accessibleRolls("src/main/resources/Day04.txt")); //p1
-        System.out.println(Day04.recursivelyAccessibleRolls("src/main/resources/Day04.txt")); //p2
+        System.out.println(Day04.accessibleRolls("src/main/resources/inputs/Day04.txt")); //p1
+        System.out.println(Day04.recursivelyAccessibleRolls("src/main/resources/inputs/Day04.txt")); //p2
     }
 
     private static int accessibleRolls(String filename) {

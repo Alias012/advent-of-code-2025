@@ -4,8 +4,8 @@ import java.io.IOException;
 
 public class Day01 {
     public static void main(String[] args) {
-        System.out.println(Day01.crackLock("src/main/resources/Day01.txt")); //p1
-        System.out.println(Day01.crackSecureLock("src/main/resources/Day01.txt")); //p2
+        System.out.println(Day01.crackLock("src/main/resources/inputs/Day01.txt")); //p1
+        System.out.println(Day01.crackSecureLock("src/main/resources/inputs/Day01.txt")); //p2
     }
 
     private static int crackLock(String filename) {

@@ -1,11 +1,12 @@
 import java.util.*;
 import java.util.stream.Collectors;
 import util.ReadFile;
+import util.Pair;
 
 public class Day08 {
     public static void main(String[] args) {
-        System.out.println(Day08.threeBiggestGroups("src/main/resources/Day08.txt")); //p1
-        System.out.println(Day08.distanceOfLastConnection("src/main/resources/Day08.txt")); //p2
+        System.out.println(Day08.threeBiggestGroups("src/main/resources/inputs/Day08.txt")); //p1
+        System.out.println(Day08.distanceOfLastConnection("src/main/resources/inputs/Day08.txt")); //p2
     }
 
     private static long threeBiggestGroups(String filename) {
@@ -46,14 +47,14 @@ public class Day08 {
             Pair<Point, Point> closestPoints = null;
             double lowestDistance = Double.MAX_VALUE;
             for (Map.Entry<Point, Pair<Point, Double>> entry : pointToNearest.entrySet()) {
-                if (entry.getValue().y() < lowestDistance) {
-                    lowestDistance = entry.getValue().y();
-                    closestPoints = new Pair<>(entry.getKey(), entry.getValue().x());
+                if (entry.getValue().getY() < lowestDistance) {
+                    lowestDistance = entry.getValue().getY();
+                    closestPoints = new Pair<>(entry.getKey(), entry.getValue().getX());
                 }
             }
 
-            int a = closestPoints.x().getGroup();
-            int b = closestPoints.y().getGroup();
+            int a = closestPoints.getX().getGroup();
+            int b = closestPoints.getY().getGroup();
             if (a != b) {
                 HashSet<Point> groupA = groupToPoints.get(a);
                 HashSet<Point> groupB = groupToPoints.get(b);
@@ -67,7 +68,7 @@ public class Day08 {
                     groupA.forEach(point -> point.setGroup(b));
                 }
             }
-            matches.add(new Pair<>(closestPoints.x(), closestPoints.y()));
+            matches.add(new Pair<>(closestPoints.getX(), closestPoints.getY()));
         } while (++count != 1000);
 
         List<Integer> groupSizes = groupToPoints.values()
@@ -112,8 +113,8 @@ public class Day08 {
                 }
             }
 
-            int a = closestPoints.x().getGroup();
-            int b = closestPoints.y().getGroup();
+            int a = closestPoints.getX().getGroup();
+            int b = closestPoints.getY().getGroup();
             HashSet<Point> groupA = groupToPoints.get(a);
             HashSet<Point> groupB = groupToPoints.get(b);
             if (groupA.size() > groupB.size()) {
@@ -127,15 +128,7 @@ public class Day08 {
             }
         } while (--numGroups != 1);
 
-        return (long) closestPoints.x().getX() * closestPoints.y().getX();
-    }
-
-    private record Pair<T, U>(T x, U y) {
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(x, y);
-        }
+        return (long) closestPoints.getX().getX() * closestPoints.getY().getX();
     }
 
     private static class Point {

@@ -5,8 +5,8 @@ import util.ReadFile;
 
 public class Day07 {
     public static void main(String[] args) {
-        System.out.println(Day07.countSplits("src/main/resources/Day07.txt")); //p1
-        System.out.println(Day07.countTimelines("src/main/resources/Day07.txt")); //p2
+        System.out.println(Day07.countSplits("src/main/resources/inputs/Day07.txt")); //p1
+        System.out.println(Day07.countTimelines("src/main/resources/inputs/Day07.txt")); //p2
     }
 
     private static int countSplits(String filename) {

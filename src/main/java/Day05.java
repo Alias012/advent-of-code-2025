@@ -7,8 +7,8 @@ import util.Range;
 
 public class Day05 {
     public static void main(String[] args) {
-        System.out.println(Day05.countAvailableFresh("src/main/resources/Day05.txt")); //p1
-        System.out.println(Day05.countAllFresh("src/main/resources/Day05.txt")); //p2
+        System.out.println(Day05.countAvailableFresh("src/main/resources/inputs/Day05.txt")); //p1
+        System.out.println(Day05.countAllFresh("src/main/resources/inputs/Day05.txt")); //p2
     }
 
     private static long countAvailableFresh(String filename) {

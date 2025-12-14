@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Day12 {
     public static void main(String[] args) {
-        System.out.println(Day12.countFittingRegions("src/main/resources/Day12.txt")); //p1
+        System.out.println(Day12.countFittingRegions("src/main/resources/inputs/Day12.txt")); //p1
     }
 
     public static long countFittingRegions(String filename) {

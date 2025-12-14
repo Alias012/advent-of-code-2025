@@ -10,8 +10,8 @@ import util.ReadFile;
 
 public class Day06 {
     public static void main(String[] args) {
-        System.out.println(Day06.verticalMath("src/main/resources/Day06.txt")); //p1
-        System.out.println(Day06.cephalopodMath("src/main/resources/Day06.txt")); //p2
+        System.out.println(Day06.verticalMath("src/main/resources/inputs/Day06.txt")); //p1
+        System.out.println(Day06.cephalopodMath("src/main/resources/inputs/Day06.txt")); //p2
     }
 
     private static long verticalMath(String filename) {
@@ -54,7 +54,7 @@ public class Day06 {
         //essentially split on the location of operator and save spaces
         return Arrays.stream(operatorRow.split("\\S"))
                      .mapToInt(whitespace -> whitespace.length() + 1)
-                     .skip(1)
+                     .skip(1) //skip since there's an operator at position 0
                      .mapToLong(width -> {
                          //transpose and save spaces
                          String[] row = new String[colLength];

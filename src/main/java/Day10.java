@@ -5,7 +5,7 @@ import util.Combinations;
 
 public class Day10 {
     public static void main(String[] args) {
-        System.out.println(Day10.fewestButtonsLights("src/main/resources/Day10.txt")); //p1
+        System.out.println(Day10.fewestButtonsLights("src/main/resources/inputs/Day10.txt")); //p1
     }
 
     public static int fewestButtonsLights(String filename) {

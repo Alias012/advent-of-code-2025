@@ -6,8 +6,8 @@ import util.ReadFile;
 
 public class Day09 {
     public static void main(String[] args) {
-        System.out.println(Day09.biggestRectangle("src/main/resources/Day09.txt")); //p1
-        System.out.println(Day09.biggestInnerRectangle("src/main/resources/Day09.txt")); //p2
+        System.out.println(Day09.biggestRectangle("src/main/resources/inputs/Day09.txt")); //p1
+        Day09.biggestInnerRectangle("src/main/resources/inputs/Day09.txt"); //p2
     }
 
     public static long biggestRectangle(String filename) {
